@@ -32,5 +32,13 @@ variable "log_sink_filter" {
 variable "viewAccessors" {
     description = "Provides access to view the log buckets"
     type        = list(string)
-    defdefault  = [] 
+    default  = [] 
+}
+
+variable "region" {
+    description = "The default GCP region to use"
+}
+
+variable "description" {
+    description = ""
 }

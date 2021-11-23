@@ -12,7 +12,8 @@ resource "google_logging_project_sink" "this" {
     description     = "${var.description} (Managed by Terraform)"
     destination     = "logging.googleapis.com/projects/${var.log_bucket_project_id}/locations/${var.region}/buckets/${var.log_bucket_id}"
     filter          = "${var.log_sink_filter}"
-    unique_writer_id= true
+    
+    unique_writer_identity = true
 }
 
 resource "google_project_iam_binding" "this-bucket-writer" {
@@ -27,6 +28,6 @@ resource "google_project_iam_binding" "this-view-accessors" {
     count           = length(var.viewAccessors) > 0 ? 1 : 0
 
     project         = var.log_bucket_project_id
-    role            = "logging.viewAccessor"
+    role            = "roles/logging.viewAccessor"
     members         = var.viewAccessors
 }
