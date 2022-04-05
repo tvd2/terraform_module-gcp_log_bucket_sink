@@ -29,16 +29,28 @@ variable "log_sink_filter" {
     type        = string
 }
 
-variable "viewAccessors" {
-    description = "Provides access to view the log buckets"
-    type        = list(string)
-    default  = [] 
-}
-
 variable "region" {
     description = "The default GCP region to use"
 }
 
 variable "description" {
     description = ""
+}
+
+variable "enabled_unique_writer" {
+    description = "If true, the sink will have a unique writer identity in the sink's destination. The default value is false, and in that case, the sink's destination is treated as if it were anonymously logged to."
+    type        = bool
+    default     = true
+}
+
+variable "viewAccessors" {
+    description = "Provides access to view the log buckets"
+    type        = list(string)
+    default  = [] 
+}
+
+variable "writer_id" {
+    description = "The identity to use for writing log entries to the sink's destination. This is used only when the sink's destination is a folder or organization. It does not apply to sinks whose destination is a project."
+    type        = list(string)
+    default     = []
 }
